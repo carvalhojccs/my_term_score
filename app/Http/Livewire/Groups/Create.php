@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    public Group $group;
+    public Group $group;    
 
     protected array $rules = [
         'group.name' => ['required', 'min:3', 'max:30', 'string', 'unique:groups.name']

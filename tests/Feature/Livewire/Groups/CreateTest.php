@@ -16,8 +16,10 @@ beforeEach(function() {
     actingAs($this->user);
 });
 
-it('should be able to create a new group', function(){    
-    livewire(Create::class)->set('group.name','Test Group')->call('save')->assertHasNoErrors();
+it('should be able to create a new group', function(){
+    livewire(Create::class)
+        ->set('group.name','Test Group')
+        ->call('save')->assertHasNoErrors();
 
     assertDatabaseCount(Group::class, 1);
 });
@@ -50,10 +52,10 @@ test('name should have a max 30 characters', function(){
         ->assertHasErrors(['group.name' => 'max']);
 });
 
-// test('name should be unique', function(){
-//     Group::factory()->create(['group.name' => 'Test Group']);
+test('name should be unique', function(){
+    Group::factory()->create(['group.name' => 'Test Group']);
 
-//     livewire(Create::class)->set('group.name', 'Test Group')->call('save')->assertHasErrors(['group.name' => 'unique']);
-// });
+    livewire(Create::class)->set('group.name', 'Test Group')->call('save')->assertHasErrors(['group.name' => 'unique']);
+});
 
 #end region
